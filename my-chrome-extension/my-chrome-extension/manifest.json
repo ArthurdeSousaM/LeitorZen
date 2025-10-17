@@ -1,0 +1,32 @@
+{
+  "manifest_version": 3,
+  "name": "Leitor Zen",
+  "version": "1.0.0",
+  "description": "Remove distrações de páginas de artigos para uma leitura focada.",
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "action": {
+    "default_icon": {
+      "48": "icons/icon48.png"
+    },
+    "default_title": "Ativar Modo Leitura",
+    "default_popup": "src/popup/popup.html"
+  },
+  "background": {
+    "service_worker": "src/background/service-worker.js"
+  },
+  "permissions": [
+    "scripting",
+    "activeTab"
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["src/styles/reader.css"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}
