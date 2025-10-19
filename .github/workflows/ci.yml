@@ -11,10 +11,10 @@ jobs:
   test-build:
     runs-on: ubuntu-latest
 
-    # todas as execuções vão rodar DENTRO da pasta do seu projeto
+    # roda todos os comandos dentro da pasta onde está seu projeto
     defaults:
       run:
-        working-directory: my-chrome-extension
+        working-directory: my-chrome-extension/my-chrome-extension
 
     steps:
       - name: Checkout
@@ -25,7 +25,7 @@ jobs:
         with:
           node-version: '20'
           cache: 'npm'
-          cache-dependency-path: my-chrome-extension/package-lock.json
+          cache-dependency-path: my-chrome-extension/my-chrome-extension/package-lock.json
 
       - name: Diagnóstico
         run: |
@@ -54,11 +54,11 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: playwright-report
-          path: my-chrome-extension/playwright-report
+          path: my-chrome-extension/my-chrome-extension/playwright-report
 
       - name: Publicar pacote da extensão (.zip)
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: extension-zip
-          path: my-chrome-extension/dist/extension.zip
+          path: my-chrome-extension/my-chrome-extension/dist/extension.zip
