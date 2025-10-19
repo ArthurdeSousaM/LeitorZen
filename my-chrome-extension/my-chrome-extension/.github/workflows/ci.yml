@@ -28,7 +28,7 @@ jobs:
           ls -la
           cat package.json || true
 
-      # Use npm install (não usamos npm ci para não exigir package-lock.json)
+      # Use npm install (não exige package-lock.json)
       - name: Instalar dependências
         run: npm install --no-audit --no-fund --silent
 
@@ -38,14 +38,13 @@ jobs:
       - name: Build da extensão (gera dist/ e dist/extension.zip)
         run: npm run build
 
-      # Força geração do relatório HTML SEMPRE; se o teste falhar, não quebra a pipeline
       - name: Testes E2E (gera relatório HTML)
         run: |
           set -e
-          npx playwright test --reporter=html || echo "::warning:: Testes falharam, mas prosseguiremos para publicar artefatos."
+          npx playwright test --reporter=html || echo "::warning:: Testes falharam, seguimos para publicar artefatos."
         continue-on-error: true
 
-      - name: Garantir pastas de artefatos (se faltarem)
+      - name: Garantir pastas de artefatos
         run: |
           mkdir -p playwright-report
           test -f dist/extension.zip || (echo "Zip não encontrado; listando dist/:" && ls -la dist/ && exit 1)
