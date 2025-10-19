@@ -18,7 +18,7 @@ Este pacote já vem com:
    - `playwright-report` (HTML)
    - `extension-zip` (`dist/extension.zip`)
 
-### Desenvolvimento local (se quiser no futuro)
+### Desenvolvimento local 
 ```bash
 npm i
 npm run build
